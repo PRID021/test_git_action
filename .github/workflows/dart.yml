@@ -31,7 +31,7 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.11'
+          flutter-version: '3.16.0'
           channel: 'stable'
           architecture: x64
       - name: Generate code
