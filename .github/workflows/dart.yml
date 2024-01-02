@@ -9,9 +9,8 @@ jobs:
     name: format
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - name: Initialize Flutter
-        uses: ./.github/actions/initialize-flutter
+        uses: ./actions/initialize-flutter
       - name: Check Code Format
         run: dart format . --set-exit-if-changed
       - name: Analyze code
