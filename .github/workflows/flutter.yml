@@ -25,4 +25,12 @@ jobs:
       - name: Run tests
         run: flutter test
       - name: Build android apk and app bundle
-        run: flutter build apk
+        run: flutter build apk --debug
+      - run: ls build/app/outputs/flutter-apk
+      - name: Distribution app artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.APP_ID}}
+          serviceCredentialsFileContent: ${{secrets.CREDENTIAL_FILE_CONTENT}}
+          groups: share_trips_team
+          file: build/app/output/flutter-apk/app-debug.apk
