@@ -20,13 +20,12 @@ jobs:
         uses: actions/checkout@v3
       - name: Install jq
         uses: dcarbone/install-jq-action@v2.0.2
-
+      - name: Install dependencies
+        run: flutter pub get
       - name: Check Code Format
         run: dart format . --set-exit-if-changed
       - name: Analyze code
         run: dart analyze .
-      - name: Install dependencies
-        run: flutter pub get
       - name: Run tests
         run: flutter test
       - name: Build android apk and app bundle
