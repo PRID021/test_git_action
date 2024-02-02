@@ -8,8 +8,9 @@ on:
     pull_request:
       branches: ["main"]
 jobs:
-  analysis:
-    name: format
+
+  build:
+    name: analysis test bundle
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,25 +20,9 @@ jobs:
         run: dart format . --set-exit-if-changed
       - name: Analyze code
         run: dart analyze .
-  widget-tests:
-    name: widget-tests
-    runs-on: ubuntu-latest
-    needs: analysis
-    steps:
-      - uses: actions/checkout@v3
-      - name: Initialize Flutter
-        uses: ./.github/workflows/actions/initialize-flutter
-      - name: Run tests
-        run: flutter test
-  build:
-    name: build flutter app
-    runs-on: ubuntu-latest
-    needs: [analysis,widget-tests]
-    steps:
-      - uses: actions/checkout@v3
-      - name: Initialize Flutter
-        uses: ./.github/workflows/actions/initialize-flutter
       - name: Install dependencies
         run: flutter pub get
+      - name: Run tests
+        run: flutter test
       - name: Build android apk and app bundle
         run: flutter build apk
