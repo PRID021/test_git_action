@@ -16,8 +16,11 @@ jobs:
 #      - uses: actions/checkout@v3
 #      - name: Initialize Flutter
 #        uses: ./.github/workflows/actions/initialize-flutter
-      - name: Check current location
-        run: ls
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install jq
+        uses: dcarbone/install-jq-action@v2.0.2
+
       - name: Check Code Format
         run: dart format . --set-exit-if-changed
       - name: Analyze code
