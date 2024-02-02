@@ -32,5 +32,5 @@ jobs:
         with:
           appId: ${{secrets.APP_ID}}
           serviceCredentialsFileContent: ${{secrets.CREDENTIAL_FILE_CONTENT}}
-          groups: share_trips_team
+          groups: git_action_tester
           file: build/app/outputs/flutter-apk/app-debug.apk
