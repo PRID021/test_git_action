@@ -13,9 +13,6 @@ jobs:
     name: analysis test bundle
     runs-on: self-hosted
     steps:
-#      - uses: actions/checkout@v3
-#      - name: Initialize Flutter
-#        uses: ./.github/workflows/actions/initialize-flutter
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Install jq
@@ -31,6 +28,21 @@ jobs:
       - name: Build android apk and app bundle
         run: flutter build apk --debug
       - run: ls build/app/outputs/flutter-apk
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: build/app/outputs/flutter-apk/app-debug.apk
+  distribute:
+    needs: build # This is important
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: build/app/outputs/flutter-apk/app-debug.apk
       - name: Distribution app artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
