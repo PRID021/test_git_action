@@ -11,11 +11,11 @@ jobs:
 
   build:
     name: analysis test bundle
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v3
-      - name: Initialize Flutter
-        uses: ./.github/workflows/actions/initialize-flutter
+#      - uses: actions/checkout@v3
+#      - name: Initialize Flutter
+#        uses: ./.github/workflows/actions/initialize-flutter
       - name: Check Code Format
         run: dart format . --set-exit-if-changed
       - name: Analyze code
